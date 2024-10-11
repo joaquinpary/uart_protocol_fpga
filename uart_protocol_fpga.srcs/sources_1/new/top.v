@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 09/29/2024 05:17:32 PM
+// Create Date: 10/08/2024 04:43:35 PM
 // Design Name: 
-// Module Name: uart_tx
+// Module Name: top
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module uart_tx(
+module top(
 
     );
 endmodule

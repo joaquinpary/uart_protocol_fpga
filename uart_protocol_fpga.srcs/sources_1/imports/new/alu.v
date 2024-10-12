@@ -1,29 +1,39 @@
 module alu#(
-    parameter NB_OP = 6,
-    parameter NB_DATA = 4
-)
-(
-    input signed [NB_DATA-1:0] i_data_a,
-    input signed [NB_DATA-1:0] i_data_b,
-    input [NB_OP-1:0] i_op,
-    output signed [NB_DATA-1:0] o_data
-);
-   
-    reg signed [NB_DATA-1:0] tmp;
+    parameter DATA_BIT = 8
+    )
+    (
+    input signed [DATA_BIT-1:0] i_data_a,
+    input signed [DATA_BIT-1:0] i_data_b,
+    input [DATA_BIT-1:0] i_op,
+    output signed [DATA_BIT-1:0] o_data
+    );
+    
+    localparam [DATA_BIT-1:0]
+        add_op = 8'b00100000,
+        sub_op = 8'b00100010,
+        and_op = 8'b00100100,
+        or_op  = 8'b00100101,
+        xor_op = 8'b00100110,
+        sra_op = 8'b00000011,
+        srl_op = 8'b00000010,
+        nor_op = 8'b00100111;
+        
+    reg signed [DATA_BIT-1:0] tmp;
     
     always @(*) begin:mux_alu       
         case(i_op)       
-            6'b100000: tmp = i_data_a + i_data_b;   // ADD
-            6'b100010: tmp = i_data_a - i_data_b;   // SUB
-            6'b100100: tmp = i_data_a & i_data_b;   // AND
-            6'b100101: tmp = i_data_a | i_data_b;   // OR
-            6'b100110: tmp = i_data_a ^ i_data_b;   // XOR
-            6'b000011: tmp = i_data_a >>> i_data_b;  // SRA
-            6'b000010: tmp = i_data_a >> i_data_b;  // SRL
-            6'b100111: tmp = ~(i_data_a | i_data_b);//NOR
-            default: tmp = {NB_DATA{1'b0}};
+            add_op: tmp = i_data_a + i_data_b;     // ADD
+            sub_op: tmp = i_data_a - i_data_b;     // SUB
+            and_op: tmp = i_data_a & i_data_b;     // AND
+            or_op:  tmp = i_data_a | i_data_b;     // OR
+            xor_op: tmp = i_data_a ^ i_data_b;     // XOR
+            sra_op: tmp = i_data_a >>> i_data_b;   // SRA
+            srl_op: tmp = i_data_a >> i_data_b;    // SRL
+            nor_op: tmp = ~(i_data_a | i_data_b);  //NOR
+            default: tmp = {DATA_BIT{1'b0}};
         endcase
     end
+    
     assign o_data = tmp;
   
 endmodule

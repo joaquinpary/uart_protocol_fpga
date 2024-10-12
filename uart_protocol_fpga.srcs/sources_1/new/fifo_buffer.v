@@ -1,17 +1,17 @@
 module fifo_buffer
     #(
-    parameter BITS = 8,
+    parameter DATA_BIT = 8,
     parameter BUS = 2
     )
     (
     input clock, reset,
     input rd, wr,
-    input [BITS-1:0] w_data,
+    input [DATA_BIT-1:0] w_data,
     output empty, full,
-    output [BITS-1:0] r_data
+    output [DATA_BIT-1:0] r_data
     );
     
-    reg [BITS-1:0] array_reg [2**BUS-1:0];
+    reg [DATA_BIT-1:0] array_reg [2**BUS-1:0];
     reg [BUS-1:0] w_ptr_reg, w_ptr_next, w_ptr_succ;
     reg [BUS-1:0] r_ptr_reg, r_ptr_next, r_ptr_succ;
     reg full_reg, empty_reg, full_next, empty_next;

@@ -102,6 +102,6 @@ module uart_rx
     end
 
     assign rx_done_tick = rx_done_reg;
-    assign o_data = b_current; 
+    assign o_data = b_current;
 
 endmodule

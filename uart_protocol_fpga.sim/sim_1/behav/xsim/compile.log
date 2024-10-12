@@ -1,3 +1,4 @@
+
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/fifo_buffer.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module fifo_buffer
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/interface.v" into library xil_defaultlib

@@ -3,22 +3,22 @@
 module fifo_buffer_tb;
 
     // Parameter
-    localparam BITS = 8;
+    localparam DATA_BIT = 8;
     localparam BUS = 2;
     
     // Inputs
     reg clock;
     reg reset;
     reg rd, wr;
-    reg [BITS-1:0] w_data;
+    reg [DATA_BIT-1:0] w_data;
     
     // Outputs
     wire empty;
     wire full;
-    wire [BITS-1:0] r_data;
+    wire [DATA_BIT-1:0] r_data;
     
     // Instantiate the UUT
-    fifo_buffer #(.BITS(BITS), .BUS(BUS)) uut(
+    fifo_buffer #(.DATA_BIT(DATA_BIT), .BUS(BUS)) uut(
         .clock(clock),
         .reset(reset),
         .rd(rd),
@@ -33,12 +33,12 @@ module fifo_buffer_tb;
     always #5 clock = ~clock; // Clock period = 10 ns
     
     // Task to write to FIFO
-    task write_fifo(input [BITS-1:0] data_in);
+    task write_fifo(input [DATA_BIT-1:0] data_in);
         begin
             @(posedge clock);
             w_data = data_in;
             wr = 1;
-            @(negedge clock);
+            @(posedge clock);
             wr = 0;
             
         end
@@ -47,9 +47,9 @@ module fifo_buffer_tb;
     // Task to read from FIFO
     task read_fifo;
         begin
-            @(negedge clock);
+            @(posedge clock);
             rd = 1;
-            @(negedge clock);
+            @(posedge clock);
             rd = 0;
         end
     endtask

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="interface_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="interface_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="85.352 ns"></ZoomEndTime>
+      <Cursor1Time time="124.587 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="172"></NameColumnWidth>
+      <ValueColumnWidth column_width="117"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="13" />
+   <wvobject type="logic" fp_name="/interface_tb/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/interface_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/rx_data">
+      <obj_property name="ElementShortName">rx_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_data[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/interface_tb/rx_done_tick">
+      <obj_property name="ElementShortName">rx_done_tick</obj_property>
+      <obj_property name="ObjectShortName">rx_done_tick</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/interface_tb/tx_done_tick">
+      <obj_property name="ElementShortName">tx_done_tick</obj_property>
+      <obj_property name="ObjectShortName">tx_done_tick</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/alu_res">
+      <obj_property name="ElementShortName">alu_res[7:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_res[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/tx_data">
+      <obj_property name="ElementShortName">tx_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/interface_tb/tx_start">
+      <obj_property name="ElementShortName">tx_start</obj_property>
+      <obj_property name="ObjectShortName">tx_start</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/data_a">
+      <obj_property name="ElementShortName">data_a[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_a[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/data_b">
+      <obj_property name="ElementShortName">data_b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_b[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/data_op">
+      <obj_property name="ElementShortName">data_op[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_op[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/DATA_BIT">
+      <obj_property name="ElementShortName">DATA_BIT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DATA_BIT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/interface_tb/WAIT">
+      <obj_property name="ElementShortName">WAIT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WAIT[31:0]</obj_property>
+   </wvobject>
+</wave_config>

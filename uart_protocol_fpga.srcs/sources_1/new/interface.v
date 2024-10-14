@@ -6,96 +6,89 @@ module interface#(
     (
     input clock,
     input reset,
-    input rx_empty,                     // RX_FIFO(empty) to INTERFACE
-    input tx_empty,                     // TX_FIFO(empty) to INTERFACE
-    input tx_full,                      // TX_FIFO(full) to INTERFACE
-    input [DATA_BIT-1:0] fifo_rx,       // RX_FIFO(r_data) to INTERFACE
-    input [DATA_BIT-1:0] alu_res,       // ALU(res) to INTERFACE
-    output rx_rd,                       // RX_FIFO(rd) to INTERFACE
-    output tx_wr,                       // TX_FIFO(wr) to INTERFACE
-    output [DATA_BIT-1:0] tx_data,      // INTERFACE to TX_FIFO(w_data)
-    output [DATA_BIT-1:0] data_a,       // INTERFACE to ALU(data_a)
-    output [DATA_BIT-1:0] data_b,       // INTERFACE to ALU(data_b)
-    output [DATA_BIT-1:0] data_op       // INTERFACE to ALU(data_op)
+    input [DATA_BIT-1:0] rx_data,
+    input rx_done_tick,
+    input tx_done_tick,
+    input alu_res,
+    output [DATA_BIT-1:0] tx_data,
+    output tx_start,
+    output [DATA_BIT-1:0] data_a,
+    output [DATA_BIT-1:0] data_b,
+    output [DATA_BIT-1:0] data_op
     );
     
     // symbolic state declaration
-    localparam [2:0]
-        idle        = 3'b000,
-        state_a     = 3'b001,
-        state_b     = 3'b010,
-        state_op    = 3'b011,
-        state_tx    = 3'b100;
+    localparam [1:0]
+        state_a     = 2'b00,
+        state_b     = 2'b01,
+        state_op    = 2'b10,
+        state_tx    = 2'b11;
         
     // signal declaration
-    reg [2:0] state_current, state_next;
-    reg [DATA_BIT-1:0] alu_res_reg;
-    reg [DATA_BIT-1:0] data_a_reg, data_b_reg, data_op_reg;
-    reg rx_rd_reg;
-    reg tx_wr_reg;
-     
+    reg [1:0] state_current, state_next;
+    reg [DATA_BIT-1:0] alu_res_current, alu_res_next;
+    reg [DATA_BIT-1:0] data_a_current, data_b_current, data_op_current;
+    reg [DATA_BIT-1:0] data_a_next, data_b_next, data_op_next;
+    reg tx_start_reg;
     
     always @(posedge clock) begin
         if (reset) begin
-            state_current <= idle;
-            data_a_reg <= 0;
-            data_b_reg <= 0;
-            data_op_reg <= 0;
-            alu_res_reg <= 0;
+            state_current <= state_a;
+            data_a_current <= 0;
+            data_b_current <= 0;
+            data_op_current <= 0;
+            alu_res_current <= 0;
+ 
         end
         else begin
             state_current <= state_next;
-            case (state_current)
-                state_a: data_a_reg <= fifo_rx;
-                state_b: data_b_reg <= fifo_rx;
-                state_op: data_op_reg <= fifo_rx;
-                state_tx: alu_res_reg <= alu_res;
-            endcase
+            data_a_current <= data_a_next;
+            data_b_current <= data_b_next;
+            data_op_current <= data_op_next;
+            alu_res_current <= alu_res_next;
         end
     end
     
     always @(*) begin
+        tx_start_reg = 1'b0;
         state_next = state_current;
-        rx_rd_reg = 1'b0;
-        tx_wr_reg = 1'b0;
+        data_a_next = data_a_current;
+        data_b_next = data_b_current;
+        data_op_next = data_op_current;
+        alu_res_next = alu_res_current;
+        wait_next = wait_current;
         case(state_current)
-            idle: begin
-                if (~rx_empty) begin
-                    state_next = state_a;
-                end
-            end
             state_a: begin
-                if (~rx_empty) begin
-                    rx_rd_reg = 1'b1;
+                //tx_start_reg = 1'b0;
+                if (rx_done_tick) begin
+                    data_a_next = rx_data;
                     state_next = state_b;
                 end
             end
             state_b: begin
-                if (~rx_empty) begin
-                    rx_rd_reg = 1'b1;
+                if (rx_done_tick) begin
+                    data_b_next = rx_data;
                     state_next = state_op;
                 end
             end
             state_op: begin
-                if (~tx_full) begin
-                    rx_rd_reg = 1'b1;
+                if (rx_done_tick) begin
+                    data_op_next = rx_data;
                     state_next = state_tx;
                 end
             end
             state_tx: begin
-                if (~tx_full) begin
-                    tx_wr_reg = 1'b1;
-                    state_next = idle;
-                end
+                alu_res_next = alu_res;
+                state_next = state_a;
+                tx_start_reg = 1'b1;
             end
         endcase
     end
     
-    assign rx_rd = rx_rd_reg;
-    assign tx_wr = tx_wr_reg;
-    assign data_a = data_a_reg;
-    assign data_b = data_b_reg;
-    assign data_op = data_op_reg;
-    assign tx_data = alu_res_reg;
+    assign data_a = data_a_current;
+    assign data_b = data_b_current;
+    assign data_op = data_op_current;
+    assign tx_data = alu_res_current;
+    assign tx_start = tx_start_reg;
     
 endmodule

@@ -1,6 +1,5 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../uart_protocol_fpga.srcs/sources_1/new/fifo_buffer.v" \
 "../../../../uart_protocol_fpga.srcs/sources_1/new/interface.v" \
 "../../../../uart_protocol_fpga.srcs/sim_1/new/interface_tb.v" \
 

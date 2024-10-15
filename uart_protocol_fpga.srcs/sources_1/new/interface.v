@@ -29,7 +29,7 @@ module interface#(
     reg [DATA_BIT-1:0] alu_res_current, alu_res_next;
     reg [DATA_BIT-1:0] data_a_current, data_b_current, data_op_current;
     reg [DATA_BIT-1:0] data_a_next, data_b_next, data_op_next;
-    reg tx_start_reg;
+    reg tx_start_current, tx_start_next;
     
     always @(posedge clock) begin
         if (reset) begin
@@ -38,6 +38,7 @@ module interface#(
             data_b_current <= 0;
             data_op_current <= 0;
             alu_res_current <= 0;
+            tx_start_current <= 1'b0;
         end
         else begin
             state_current <= state_next;
@@ -45,16 +46,17 @@ module interface#(
             data_b_current <= data_b_next;
             data_op_current <= data_op_next;
             alu_res_current <= alu_res_next;
+            tx_start_current <= tx_start_next;
         end
     end
     
     always @(*) begin
-        tx_start_reg = 1'b0;
         state_next = state_current;
         data_a_next = data_a_current;
         data_b_next = data_b_current;
         data_op_next = data_op_current;
         alu_res_next = alu_res_current;
+        tx_start_next = 1'b0;
         case(state_current)
             state_a: begin
                 if (rx_done_tick) begin
@@ -77,7 +79,7 @@ module interface#(
             state_tx: begin
                 alu_res_next = alu_res;
                 state_next = state_a;
-                tx_start_reg = 1'b1;
+                tx_start_next = 1'b1;
             end
         endcase
     end
@@ -86,6 +88,6 @@ module interface#(
     assign data_b = data_b_current;
     assign data_op = data_op_current;
     assign tx_data = alu_res_current;
-    assign tx_start = tx_start_reg;
+    assign tx_start = tx_start_current;
     
 endmodule

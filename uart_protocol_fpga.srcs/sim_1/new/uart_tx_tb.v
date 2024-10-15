@@ -70,8 +70,8 @@ module uart_tx_tb;
         #20;
 
         // Send a byte
-        $display("Sending 0xA5...");
-        uart_send_byte(8'hA5); // Enviar el byte 0xA5
+        $display("Sending 0x02...");
+        uart_send_byte(8'h02); // Enviar el byte 0x02
 
         // Wait for transmission completion
         $display("Transmission completed.");

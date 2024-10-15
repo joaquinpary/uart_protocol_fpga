@@ -3,8 +3,9 @@
 module uart_tx_tb;
 
     // Parameter declaration
-    parameter DATA_BIT = 8;
-    parameter CLOCK_TICK = 10; // Para un baud rate típico de 9600 bps
+    localparam DATA_BIT = 8;
+    localparam CLOCK_TICK = 10; // Para un baud rate típico de 9600 bps
+    localparam STOP_BIT_TICK = 16;
 
     // Inputs to the DUT (Device Under Test)
     reg clock;
@@ -26,7 +27,7 @@ module uart_tx_tb;
     // Instantiate the UART TX module
     uart_tx #(
         .DATA_BIT(DATA_BIT),
-        .CLOCK_TICK(CLOCK_TICK)
+        .STOP_BIT_TICK(STOP_BIT_TICK)
     ) uart_tx_inst (
         .clock(clock),
         .reset(reset),

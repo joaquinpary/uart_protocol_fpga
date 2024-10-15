@@ -3,7 +3,7 @@
 module uart_tx
     #(
     parameter DATA_BIT = 8,
-    parameter CLOCK_TICK = 325
+    parameter STOP_BIT_TICK = 16
     )
     (
     input clock,
@@ -96,7 +96,7 @@ module uart_tx
             stop: begin
                 tx_next = 1'b1;
                 if (s_tick) begin
-                    if (s_current == (CLOCK_TICK - 1)) begin
+                    if (s_current == (STOP_BIT_TICK - 1)) begin
                         state_next = idle;
                         tx_done_reg = 1'b1;
                     end

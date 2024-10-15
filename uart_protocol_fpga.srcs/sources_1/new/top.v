@@ -2,7 +2,8 @@
 
 module top#(
     parameter DATA_BIT = 8,
-    parameter CLOCK_TICK = 325
+    parameter CLOCK_TICK = 325,
+    parameter STOP_BIT_TICK = 16
     )
     (
     input clock,
@@ -34,7 +35,7 @@ module top#(
         .o_tick(s_tick)
         );
     
-    uart_rx#(.DATA_BIT(DATA_BIT), .CLOCK_TICK(CLOCK_TICK)) mod_uart_rx(
+    uart_rx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) mod_uart_rx(
         .clock(clock),
         .reset(reset),
         .rx(i_rx),
@@ -43,7 +44,7 @@ module top#(
         .o_data(rx_data)
         );
     
-    uart_tx#(.DATA_BIT(DATA_BIT), .CLOCK_TICK(CLOCK_TICK)) mod_uart_tx(
+    uart_tx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) mod_uart_tx(
         .clock(clock),
         .reset(reset),
         .s_tick(s_tick),

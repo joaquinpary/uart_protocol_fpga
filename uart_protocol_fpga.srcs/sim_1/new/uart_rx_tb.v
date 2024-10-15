@@ -4,8 +4,9 @@ module uart_rx_tb;
     
     // Parameters
     localparam DATA_BIT = 8;
-    localparam CLOCK_TICK = 6;  //325 = 9600 baudios
+    localparam CLOCK_TICK = 325;  //325 = 9600 baudios
     localparam CLOCK_PERIOD = 10;
+    localparam STOP_BIT_TICK = 16;
     
     // Inputs
     reg clock, reset;
@@ -24,7 +25,7 @@ module uart_rx_tb;
         .o_tick(s_tick)
         );
     
-    uart_rx #(.DATA_BIT(DATA_BIT), .CLOCK_TICK(CLOCK_TICK)) uut (
+    uart_rx #(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) uut (
         .clock(clock),
         .reset(reset),
         .rx(rx),
@@ -74,7 +75,7 @@ module uart_rx_tb;
         
         // Send a byte
         $display("Send 0xA5");
-        uart_send_byte(8'hA5); // 
+        uart_send_byte(8'b01010101); // 
         
         // Wait reception
         @(posedge rx_done_tick);

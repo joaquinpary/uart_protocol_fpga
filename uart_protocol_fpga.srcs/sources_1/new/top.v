@@ -10,11 +10,19 @@ module top#(
     input reset,
     input i_rx,
     output o_tx,
+    
     output rx_done,
-    output [DATA_BIT-1:0] o_rx
+    output [DATA_BIT-1:0] o_rx,
+    output [DATA_BIT-1:0] o_data_a,
+    output [DATA_BIT-1:0] o_data_b,
+    output [DATA_BIT-1:0] o_data_op,
+    output [DATA_BIT-1:0] o_alu_res,
+    output o_tx_start,
+    output [DATA_BIT-1:0] o_tx_data,
+    output o_tx_done_tick
     );
     
-    // BAUD RATE GENETERATO --- UART RX / UART TX
+    // BAUD RATE GENETERATE --- UART RX / UART TX
     wire s_tick;
     
     // UART_RX / UART_TX --- INTERFACE
@@ -77,4 +85,13 @@ module top#(
     
     assign rx_done = rx_done_tick;
     assign o_rx = rx_data;
+    
+    assign o_data_a = data_a;
+    assign o_data_b = data_b;
+    assign o_data_op = data_op;
+    assign o_alu_res = alu_res;
+    assign o_tx_start = tx_start;
+    assign o_tx_data = tx_data;
+    assign o_tx_done_tick = tx_done_tick;
+    
 endmodule

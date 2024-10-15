@@ -12,6 +12,13 @@ module top_tb;
     wire rx_done;
     wire [DATA_BIT-1:0] o_rx;
     wire s_tick;
+    wire [DATA_BIT-1:0] o_data_a;
+    wire [DATA_BIT-1:0] o_data_b;
+    wire [DATA_BIT-1:0] o_data_op;
+    wire [DATA_BIT-1:0] o_alu_res;
+    wire o_tx_start;
+    wire [DATA_BIT-1:0] o_tx_data;
+    wire o_tx_done_tick;
     
     baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) mod_baud_rate_generator(
         .clock(clock),
@@ -24,7 +31,14 @@ module top_tb;
         .i_rx(i_rx),
         .o_tx(o_tx),
         .rx_done(rx_done),
-        .o_rx(o_rx)
+        .o_rx(o_rx),
+        .o_data_a(o_data_a),
+        .o_data_b(o_data_b),
+        .o_data_op(o_data_op),
+        .o_alu_res(o_alu_res),
+        .o_tx_start(o_tx_start),
+        .o_tx_data(o_tx_data),
+        .o_tx_done_tick(o_tx_done_tick)
         );
         
     task uart_send_byte(input [7:0] byte);

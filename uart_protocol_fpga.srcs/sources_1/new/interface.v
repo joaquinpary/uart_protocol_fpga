@@ -9,7 +9,7 @@ module interface#(
     input [DATA_BIT-1:0] rx_data,
     input rx_done_tick,
     input tx_done_tick,
-    input alu_res,
+    input [DATA_BIT-1:0] alu_res,
     output [DATA_BIT-1:0] tx_data,
     output tx_start,
     output [DATA_BIT-1:0] data_a,
@@ -38,7 +38,6 @@ module interface#(
             data_b_current <= 0;
             data_op_current <= 0;
             alu_res_current <= 0;
- 
         end
         else begin
             state_current <= state_next;
@@ -56,10 +55,8 @@ module interface#(
         data_b_next = data_b_current;
         data_op_next = data_op_current;
         alu_res_next = alu_res_current;
-        wait_next = wait_current;
         case(state_current)
             state_a: begin
-                //tx_start_reg = 1'b0;
                 if (rx_done_tick) begin
                     data_a_next = rx_data;
                     state_next = state_b;

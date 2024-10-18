@@ -6,13 +6,17 @@ import time
 ser = serial.Serial(
     port = '/dev/ttyUSB0',
     baudrate=9600,
-    timeout=1
+    timeout=1,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS
 )
 
 def send(data):
     if ser.is_open:
-        ser.write(data.encode())
-        print("Sent: " + data)
+        ser.write(data)
+        hex_data = ', '.join(f'0x{byte:02x}' for byte in data)
+        print(hex_data)
         return data
     else:
         print("Serial port not open")
@@ -21,7 +25,8 @@ def send(data):
 def receive():
     if ser.is_open:
         data = ser.readline()
-        print("Received: " + data.decode())
+        hex_data = ', '.join(f'0x{byte:02x}' for byte in data)
+        print(hex_data)
         return data
     else:
         print("Serial port not open")
@@ -31,10 +36,15 @@ def receive():
 try:
     for i in range(5):
         time.sleep(1)
-        send(input())   # send a
-        send(input())   # send b
-        send(input())   # send op_code
+        send(b"\x01")   # send a
+        #send(bytes(["0b00000001"]))   # send a
+        time.sleep(1)
+        send(b"\x01")   # send b
+        time.sleep(1)
+        send(b"\x20")   # send op_code
+        time.sleep(1)
         receive()       # receive result
+
 except serial.SerialException as e:
     print("Communication error: " + str(e))
 

@@ -6,9 +6,12 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA
 INFO: [VRFC 10-311] analyzing module interface
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/top.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module top
+WARNING: [VRFC 10-9336] redeclaration of ANSI port 'clock_50mhz' is not allowed [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/top.v:17]
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/uart_rx.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module uart_rx
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/uart_tx.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module uart_tx
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module top_tb
+WARNING: [VRFC 10-3248] data object 'o_data_tx' is already declared [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:71]
+WARNING: [VRFC 10-9364] second declaration of 'o_data_tx' is ignored [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:71]

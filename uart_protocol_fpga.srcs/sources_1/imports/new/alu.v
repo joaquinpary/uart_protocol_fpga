@@ -30,7 +30,7 @@ module alu#(
             sra_op: tmp = i_data_a >>> i_data_b;   // SRA
             srl_op: tmp = i_data_a >> i_data_b;    // SRL
             nor_op: tmp = ~(i_data_a | i_data_b);  //NOR
-            default: tmp = {DATA_BIT{1'b0}};
+            default: tmp = {DATA_BIT{1'b1}};
         endcase
     end
     

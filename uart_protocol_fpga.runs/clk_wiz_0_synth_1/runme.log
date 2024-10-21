@@ -1,0 +1,24 @@
+
+*** Running vivado
+    with args -log clk_wiz_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source clk_wiz_0.tcl
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Fri Oct 18 16:02:54 2024
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source clk_wiz_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1408.945 ; gain = 0.027 ; free physical = 185 ; free virtual = 6018
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: clk_wiz_0
+INFO: [IP_Flow 19-6922] IPCACHE: Exporting cached entry 23eeadbece5e0f45 to dir: /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.runs/clk_wiz_0_synth_1
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip/2024.1/2/3/23eeadbece5e0f45/clk_wiz_0_stub.vhdl to /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.runs/clk_wiz_0_synth_1/clk_wiz_0_stub.vhdl.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip/2024.1/2/3/23eeadbece5e0f45/clk_wiz_0.dcp to /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.runs/clk_wiz_0_synth_1/clk_wiz_0.dcp.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip/2024.1/2/3/23eeadbece5e0f45/clk_wiz_0_stub.v to /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.runs/clk_wiz_0_synth_1/clk_wiz_0_stub.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip/2024.1/2/3/23eeadbece5e0f45/clk_wiz_0_sim_netlist.v to /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.runs/clk_wiz_0_synth_1/clk_wiz_0_sim_netlist.v.
+INFO: [IP_Flow 19-6928] IPCACHE: copied cached file /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip/2024.1/2/3/23eeadbece5e0f45/clk_wiz_0_sim_netlist.vhdl to /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.runs/clk_wiz_0_synth_1/clk_wiz_0_sim_netlist.vhdl.
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP clk_wiz_0, cache-ID = 23eeadbece5e0f45.
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 18 16:03:07 2024...

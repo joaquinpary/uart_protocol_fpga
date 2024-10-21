@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="8164" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="25712" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="34728" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="53049" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="63948" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="82379" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="86058" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="102803" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado" Owner="joaquin" Host="joaquin-HP" Pid="119783" HostCore="12" HostMemory="7429712">
+    </Process>
+</ProcessHandle>

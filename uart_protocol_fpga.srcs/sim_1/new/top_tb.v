@@ -2,44 +2,43 @@
 
 module top_tb;
     localparam DATA_BIT = 8;            // number of data bits
-    localparam CLOCK_TICK = 5;          // clock for tick (baud rate gen mod)
+    localparam CLOCK_TICK = 10;          // clock for tick (baud rate gen mod)
     localparam STOP_BIT_TICK = 16;      // bits for stop bit in rx/tx
     
     reg clock;
     reg reset;
     reg i_rx;
     wire o_tx;
-    wire rx_done;
-    wire [DATA_BIT-1:0] o_rx;
     wire s_tick;
-    wire [DATA_BIT-1:0] o_data_a;
-    wire [DATA_BIT-1:0] o_data_b;
-    wire [DATA_BIT-1:0] o_data_op;
-    wire [DATA_BIT-1:0] o_alu_res;
-    wire o_tx_start;
-    wire [DATA_BIT-1:0] o_tx_data;
-    wire o_tx_done_tick;
+    wire clock_wizard;
     
-    baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) mod_baud_rate_generator(
+    wire rx_done_tick;
+    wire [DATA_BIT-1:0] o_data_tx;
+    
+    
+    
+    baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) baud_rate_generator_mod (
         .clock(clock),
         .o_tick(s_tick)
         );
         
     top#(.DATA_BIT(DATA_BIT), .CLOCK_TICK(CLOCK_TICK), .STOP_BIT_TICK(STOP_BIT_TICK)) uut(
-        .clock(clock),
+        .clock_50mhz(clock),
         .reset(reset),
         .i_rx(i_rx),
         .o_tx(o_tx),
-        .rx_done(rx_done),
-        .o_rx(o_rx),
-        .o_data_a(o_data_a),
-        .o_data_b(o_data_b),
-        .o_data_op(o_data_op),
-        .o_alu_res(o_alu_res),
-        .o_tx_start(o_tx_start),
-        .o_tx_data(o_tx_data),
-        .o_tx_done_tick(o_tx_done_tick)
+        .clock_wizard(clock_wizard)
         );
+        
+    uart_rx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) rx_test_mod(
+        .clock(clock),
+        .reset(reset),
+        .rx(o_tx),
+        .s_tick(s_tick),
+        .rx_done_tick(rx_done_tick),
+        .o_data(o_data_tx)
+        );
+        
         
     task uart_send_byte(input [7:0] byte);
         integer i;
@@ -66,7 +65,12 @@ module top_tb;
         end
     endtask
     always #5 clock = ~clock;  // 10ns clock period
-
+    
+    integer i;
+    integer j;
+    reg [DATA_BIT-1:0] o_data_tx = 8'b00000000;
+    reg [DATA_BIT-1:0] o_data_tx_aux = 8'b00000000; 
+    
     initial begin
         clock = 0;
         i_rx = 1;
@@ -82,7 +86,7 @@ module top_tb;
         i_rx = 1;
         #100;
         uart_send_byte(8'b00100000);
-        
+               
         #50;
         #50;
         $finish;

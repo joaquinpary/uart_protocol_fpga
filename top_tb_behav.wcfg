@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="top_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,824.745 ns"></ZoomEndTime>
+      <Cursor1Time time="122,585.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="151"></NameColumnWidth>
+      <ValueColumnWidth column_width="125"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject type="logic" fp_name="/top_tb/clock_in">
+      <obj_property name="ElementShortName">clock_in</obj_property>
+      <obj_property name="ObjectShortName">clock_in</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/clock">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/reset_cw">
+      <obj_property name="ElementShortName">reset_cw</obj_property>
+      <obj_property name="ObjectShortName">reset_cw</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/s_tick">
+      <obj_property name="ElementShortName">s_tick</obj_property>
+      <obj_property name="ObjectShortName">s_tick</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/i_rx">
+      <obj_property name="ElementShortName">i_rx</obj_property>
+      <obj_property name="ObjectShortName">i_rx</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/uut/mod_uart_rx/rx_done_tick">
+      <obj_property name="ElementShortName">rx_done_tick</obj_property>
+      <obj_property name="ObjectShortName">rx_done_tick</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/uut/mod_uart_rx/o_data">
+      <obj_property name="ElementShortName">o_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/o_tx">
+      <obj_property name="ElementShortName">o_tx</obj_property>
+      <obj_property name="ObjectShortName">o_tx</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/rx_done_tick">
+      <obj_property name="ElementShortName">rx_done_tick</obj_property>
+      <obj_property name="ObjectShortName">rx_done_tick</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/o_data_tx">
+      <obj_property name="ElementShortName">o_data_tx[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_data_tx[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/o_data_tx_aux">
+      <obj_property name="ElementShortName">o_data_tx_aux[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_data_tx_aux[7:0]</obj_property>
+   </wvobject>
+</wave_config>

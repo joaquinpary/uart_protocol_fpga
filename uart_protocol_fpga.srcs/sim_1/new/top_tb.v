@@ -5,17 +5,28 @@ module top_tb;
     localparam CLOCK_TICK = 10;          // clock for tick (baud rate gen mod)
     localparam STOP_BIT_TICK = 16;      // bits for stop bit in rx/tx
     
-    reg clock;
+    reg clock_in;
     reg reset;
+    reg reset_cw;
     reg i_rx;
     wire o_tx;
     wire s_tick;
-    wire clock_wizard;
     
     wire rx_done_tick;
     wire [DATA_BIT-1:0] o_data_tx;
     
+    wire clock;
     
+    always #5 clock_in = ~clock_in;  // 10ns clock period
+    
+    clk_wiz_0 instance_name(
+    // Clock out ports
+    .clk_out1(clock),     // output clk_out1
+    // Status and control signals
+    .reset(reset_cw), // input reset
+    // Clock in ports
+    .clk_in1(clock_in)      // input clk_in1
+    );
     
     baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) baud_rate_generator_mod (
         .clock(clock),
@@ -23,11 +34,10 @@ module top_tb;
         );
         
     top#(.DATA_BIT(DATA_BIT), .CLOCK_TICK(CLOCK_TICK), .STOP_BIT_TICK(STOP_BIT_TICK)) uut(
-        .clock_50mhz(clock),
+        .clock(clock),
         .reset(reset),
         .i_rx(i_rx),
-        .o_tx(o_tx),
-        .clock_wizard(clock_wizard)
+        .o_tx(o_tx)
         );
         
     uart_rx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) rx_test_mod(
@@ -64,7 +74,6 @@ module top_tb;
          
         end
     endtask
-    always #5 clock = ~clock;  // 10ns clock period
     
     integer i;
     integer j;
@@ -72,14 +81,21 @@ module top_tb;
     reg [DATA_BIT-1:0] o_data_tx_aux = 8'b00000000; 
     
     initial begin
-        clock = 0;
+        clock_in = 0;                             // Descomentar para clock wizard
+        //clock = 0;
         i_rx = 1;
         reset = 1;
-        #20;
-        reset = 0;
+        reset_cw = 1;
         #50;
+        reset_cw = 0;
+        #100;
         
-        uart_send_byte(8'b00000001);
+        #5000;
+        
+        reset = 0;
+        #2000;
+        
+        uart_send_byte(8'b01010101);
         i_rx = 1;
         #100;
         uart_send_byte(8'b00000001);

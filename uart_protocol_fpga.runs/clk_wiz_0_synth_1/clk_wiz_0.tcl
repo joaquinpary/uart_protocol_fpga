@@ -56,14 +56,10 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "clk_wiz_0_synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
-set_param synth.incrementalSynthesisCache ./.Xil/Vivado-4815-joaquin-HP/incrSyn
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 OPTRACE "Creating in-memory project" START { }
-create_project -in_memory -part xc7a35tcpg236-1
+create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
@@ -74,7 +70,7 @@ set_property parent.project_path /home/joaquin/Facultad/ARQUITECTURA/uart_protoc
 set_property XPM_LIBRARIES XPM_CDC [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]
+set_property board_part digilentinc.com:nexys4_ddr:part0:1.1 [current_project]
 set_property ip_output_repo /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
@@ -105,7 +101,7 @@ if { $cacheID == "" } {
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top clk_wiz_0 -part xc7a35tcpg236-1 -incremental_mode off -mode out_of_context
+synth_design -top clk_wiz_0 -part xc7a100tcsg324-1 -incremental_mode off -mode out_of_context
 OPTRACE "synth_design" END { }
 OPTRACE "Write IP Cache" START { }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="clk_wiz_0_synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1729278167">
+<GenRun Id="clk_wiz_0_synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1729617086">
   <File Type="RDS-DCP" Name="clk_wiz_0.dcp"/>
   <File Type="RDS-UTIL-PB" Name="clk_wiz_0_utilization_synth.pb"/>
   <File Type="PA-TCL" Name="clk_wiz_0.tcl"/>
@@ -34,11 +34,11 @@
   </FileSet>
   <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
     <Filter Type="Utils"/>
-    <File Path="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
+    <File Path="$PSRCDIR/utils_1/imports/synth_2/top.dcp">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedInSteps" Val="synth_1"/>
+        <Attr Name="UsedInSteps" Val="synth_2"/>
         <Attr Name="AutoDcp" Val="1"/>
       </FileInfo>
     </File>

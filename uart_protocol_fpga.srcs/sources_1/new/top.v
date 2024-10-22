@@ -2,27 +2,29 @@
 
 module top#(
     parameter DATA_BIT = 8,
-    parameter CLOCK_TICK = 325,
+    parameter CLOCK_TICK = 326,
     parameter STOP_BIT_TICK = 16
     )
     (
-    input clock_50mhz,
+    input i_clock,
     input reset,
+    input reset_cw,
     input i_rx,
     output o_tx,
-    output o_tick,
-    output clock_wizard
+    output [DATA_BIT-1:0] rx_data,
+    output reset_state,
+    output reset_state_cw
     );
     
-    wire clock_50mhz;
-    wire clock_100mhz;
+    wire clock;
+//    wire clock_100mhz;
     
     // BAUD RATE GENETERATE --- UART RX / UART TX
     wire s_tick;
     
     // UART_RX / UART_TX --- INTERFACE
     wire rx_done_tick;
-    wire [DATA_BIT-1:0] rx_data;
+    //wire [DATA_BIT-1:0] rx_data;        // Linea para probar que funciona el RX con clock wizard
     wire tx_start;
     wire [DATA_BIT-1:0] tx_data;
     wire tx_done_tick;
@@ -33,20 +35,22 @@ module top#(
     wire [DATA_BIT-1:0] data_b;
     wire [DATA_BIT-1:0] data_op;
     
-//    clk_wiz_0 instance_name(
-//        .clk_out1(clock_100mhz),
-//        .clk_out2(clock_50mhz),
-//        .reset(reset),
-//        .clk_in1(clock)
-//        );
+    reg reset_state_reg = 1'b0;
+    reg reset_state_cw_reg = 1'b0;
+    
+    clk_wiz_0 instance_name(
+        .clk_out1(clock),
+        .reset(reset_cw),
+        .clk_in1(i_clock)
+        );
         
     baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) mod_baud_rate_generator(
-        .clock(clock_50mhz),
+        .clock(clock),
         .o_tick(s_tick)
         );
     
     uart_rx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) mod_uart_rx(
-        .clock(clock_50mhz),
+        .clock(clock),
         .reset(reset),
         .rx(i_rx),
         .s_tick(s_tick),
@@ -55,7 +59,7 @@ module top#(
         );
     
     uart_tx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) mod_uart_tx(
-        .clock(clock_50mhz),
+        .clock(clock),
         .reset(reset),
         .s_tick(s_tick),
         .tx_start(tx_start),
@@ -65,7 +69,7 @@ module top#(
         );
      
     interface#(.DATA_BIT(DATA_BIT)) mod_interface(
-        .clock(clock_50mhz),
+        .clock(clock),
         .reset(reset),
         .rx_data(rx_data),
         .rx_done_tick(rx_done_tick),
@@ -85,6 +89,21 @@ module top#(
         .o_data(alu_res)
         );
     
-    assign clock_wizard = clock_50mhz;
+    always@(posedge i_clock) begin
+        if (reset)
+            reset_state_reg = 1'b1;
+        else
+            reset_state_reg = 1'b0;
+    end
+    
+    always@(posedge i_clock) begin
+        if (reset_cw)
+            reset_state_cw_reg = 1'b1;
+        else
+            reset_state_cw_reg = 1'b0;
+    end
+    
+    assign reset_state = reset_state_reg;   
+    assign reset_state_cw = reset_state_cw_reg;   
     
 endmodule

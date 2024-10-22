@@ -56,23 +56,19 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
-set_param chipscope.maxJobs 3
-set_param xicom.use_bs_reader 1
-set_param synth.incrementalSynthesisCache ./.Xil/Vivado-4815-joaquin-HP/incrSyn
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
-create_project -in_memory -part xc7a35tcpg236-1
+create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
+set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/wt [current_project]
 set_property parent.project_path /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.xpr [current_project]
+set_property XPM_LIBRARIES XPM_CDC [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]
+set_property board_part digilentinc.com:nexys4_ddr:part0:1.1 [current_project]
 set_property ip_output_repo /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
@@ -85,6 +81,11 @@ read_verilog -library xil_defaultlib {
   /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/uart_tx.v
   /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/new/top.v
 }
+read_ip -quiet /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+set_property used_in_implementation false [get_files -all /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
+set_property used_in_implementation false [get_files -all /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
+set_property used_in_implementation false [get_files -all /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
+
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -94,16 +95,14 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/constrs_1/imports/digilent-xdc-master/Basys-3-Master.xdc
-set_property used_in_implementation false [get_files /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/constrs_1/imports/digilent-xdc-master/Basys-3-Master.xdc]
+read_xdc /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/constrs_1/imports/digilent-xdc-master/Nexys-4-DDR-Master.xdc
+set_property used_in_implementation false [get_files /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/constrs_1/imports/digilent-xdc-master/Nexys-4-DDR-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
-
-read_checkpoint -auto_incremental -incremental /home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/utils_1/imports/synth_1/top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top top -part xc7a35tcpg236-1
+synth_design -top top -part xc7a100tcsg324-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

@@ -2,12 +2,16 @@
 
 module baud_rate_generator
     #(
-    CLOCK_TICK = 325   // Para 9600 baudios
+    parameter BAUD_RATE = 9600,
+    parameter FREQ = 50E6
     )
     (
     input clock,
     output o_tick
     );
+    
+    localparam integer CLOCK_TICK = FREQ / (BAUD_RATE * 16);
+    
     integer count = 0;
     reg tick;
     
@@ -22,4 +26,5 @@ module baud_rate_generator
     end       
     
     assign o_tick = tick; 
+    
 endmodule

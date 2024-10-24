@@ -2,7 +2,8 @@
 
 module top#(
     parameter DATA_BIT = 8,
-    parameter CLOCK_TICK = 326,
+    parameter BAUD_RATE = 9600,
+    parameter FREQ = 50E6,
     parameter STOP_BIT_TICK = 16
     )
     (
@@ -11,20 +12,18 @@ module top#(
     input reset_cw,
     input i_rx,
     output o_tx,
-    output [DATA_BIT-1:0] rx_data,
     output reset_state,
     output reset_state_cw
     );
     
     wire clock;
-//    wire clock_100mhz;
     
     // BAUD RATE GENETERATE --- UART RX / UART TX
     wire s_tick;
     
     // UART_RX / UART_TX --- INTERFACE
     wire rx_done_tick;
-    //wire [DATA_BIT-1:0] rx_data;        // Linea para probar que funciona el RX con clock wizard
+    wire [DATA_BIT-1:0] rx_data; 
     wire tx_start;
     wire [DATA_BIT-1:0] tx_data;
     wire tx_done_tick;
@@ -44,7 +43,7 @@ module top#(
         .clk_in1(i_clock)
         );
         
-    baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) mod_baud_rate_generator(
+    baud_rate_generator#(.BAUD_RATE(BAUD_RATE), .FREQ(FREQ)) mod_baud_rate_generator(
         .clock(clock),
         .o_tick(s_tick)
         );

@@ -16,5 +16,7 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA
 INFO: [VRFC 10-311] analyzing module uart_tx
 INFO: [VRFC 10-2263] Analyzing Verilog file "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module top_tb
-WARNING: [VRFC 10-3248] data object 'o_data_tx' is already declared [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:80]
-WARNING: [VRFC 10-9364] second declaration of 'o_data_tx' is ignored [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:80]
+WARNING: [VRFC 10-3248] data object 'clock' is already declared [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:19]
+WARNING: [VRFC 10-9364] second declaration of 'clock' is ignored [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:19]
+WARNING: [VRFC 10-3248] data object 'o_data_tx' is already declared [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:76]
+WARNING: [VRFC 10-9364] second declaration of 'o_data_tx' is ignored [/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v:76]

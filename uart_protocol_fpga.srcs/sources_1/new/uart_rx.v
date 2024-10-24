@@ -14,21 +14,18 @@ module uart_rx
     output [7:0] o_data
     );
     
-    // symbolic state declaration
     localparam [1:0]
         idle    = 2'b00,
         start   = 2'b01,
         data    = 2'b10,
         stop    = 2'b11;
     
-    // signal declaration
     reg [1:0] state_current, state_next; 
     reg [3:0] s_current, s_next;
     reg [2:0] n_current, n_next;
     reg [7:0] b_current, b_next;
     reg rx_done_reg;
     
-    // body
     // FSMD state & data registers
     always @(posedge clock) begin
         if (reset) begin

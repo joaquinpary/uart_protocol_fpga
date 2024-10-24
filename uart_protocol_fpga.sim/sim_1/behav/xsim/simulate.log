@@ -1,2 +1,2 @@
 Time resolution is 1 ps
-$finish called at time : 93585 ns : File "/home/joaquin/Facultad/ARQUITECTURA/uart_protocol_fpga/uart_protocol_fpga.srcs/sim_1/new/top_tb.v" Line 108
+INFO: xsimkernel Simulation Memory Usage: 103264 KB (Peak: 160276 KB), Simulation CPU Usage: 14100 ms

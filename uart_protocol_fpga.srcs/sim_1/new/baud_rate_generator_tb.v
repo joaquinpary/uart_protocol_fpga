@@ -1,14 +1,18 @@
 `timescale 1ns / 1ps
 
 module baud_rate_generator_tb;
-    
     reg clock;
     integer i;
     
     wire o_tick;
+
+    localparam BAUD_RATE = 9600;
+    localparam FREQ = 50E6;
+        
     baud_rate_generator 
         #(
-        .CLOCK_TICK(16)
+        .BAUD_RATE(BAUD_RATE),
+        .FREQ(FREQ)
         )
     uut
         (
@@ -17,11 +21,11 @@ module baud_rate_generator_tb;
         );
     
     initial begin
-        for (i = 0; i <= (16*5); i = i + 1) begin
+        for (i = 0; i <= (500); i = i + 1) begin
             clock = 1;
-            #5;
+            #10;
             clock = 0;
-            #5;
+            #10;
         end
     $finish;
     end

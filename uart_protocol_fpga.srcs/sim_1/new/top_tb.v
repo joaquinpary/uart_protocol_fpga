@@ -2,10 +2,11 @@
 
 module top_tb;
     localparam DATA_BIT = 8;            // number of data bits
-    localparam CLOCK_TICK = 10;          // clock for tick (baud rate gen mod)
+    localparam BAUD_RATE = 9600;
+    localparam FREQ = 10E6;               // clock for tick (baud rate gen mod)
     localparam STOP_BIT_TICK = 16;      // bits for stop bit in rx/tx
     
-    reg clock_in;
+    reg clock;
     reg reset;
     reg reset_cw;
     reg i_rx;
@@ -17,31 +18,26 @@ module top_tb;
     
     wire clock;
     
-    always #5 clock_in = ~clock_in;  // 10ns clock period
+    reg clock_baud_rate_gen;
     
-    clk_wiz_0 instance_name(
-    // Clock out ports
-    .clk_out1(clock),     // output clk_out1
-    // Status and control signals
-    .reset(reset_cw), // input reset
-    // Clock in ports
-    .clk_in1(clock_in)      // input clk_in1
-    );
+    always #5 clock = ~clock;  // 10ns clock period
+    always #10 clock_baud_rate_gen = ~clock_baud_rate_gen;   // 20ns clock period
     
-    baud_rate_generator#(.CLOCK_TICK(CLOCK_TICK)) baud_rate_generator_mod (
-        .clock(clock),
+    baud_rate_generator#(.BAUD_RATE(BAUD_RATE), .FREQ(FREQ)) baud_rate_generator_mod (
+        .clock(clock_baud_rate_gen),
         .o_tick(s_tick)
         );
         
-    top#(.DATA_BIT(DATA_BIT), .CLOCK_TICK(CLOCK_TICK), .STOP_BIT_TICK(STOP_BIT_TICK)) uut(
-        .clock(clock),
+    top#(.DATA_BIT(DATA_BIT), .BAUD_RATE(BAUD_RATE), .FREQ(FREQ), .STOP_BIT_TICK(STOP_BIT_TICK)) uut(
+        .i_clock(clock),
         .reset(reset),
+        .reset_cw(reset_cw),
         .i_rx(i_rx),
         .o_tx(o_tx)
         );
         
     uart_rx#(.DATA_BIT(DATA_BIT), .STOP_BIT_TICK(STOP_BIT_TICK)) rx_test_mod(
-        .clock(clock),
+        .clock(clock_baud_rate_gen),
         .reset(reset),
         .rx(o_tx),
         .s_tick(s_tick),
@@ -81,8 +77,8 @@ module top_tb;
     reg [DATA_BIT-1:0] o_data_tx_aux = 8'b00000000; 
     
     initial begin
-        clock_in = 0;                             // Descomentar para clock wizard
-        //clock = 0;
+        clock = 0;                        
+        clock_baud_rate_gen = 0;
         i_rx = 1;
         reset = 1;
         reset_cw = 1;
@@ -90,21 +86,21 @@ module top_tb;
         reset_cw = 0;
         #100;
         
-        #5000;
+        #500;
         
         reset = 0;
-        #2000;
+        #200;
         
-        uart_send_byte(8'b01010101);
-        i_rx = 1;
-        #100;
         uart_send_byte(8'b00000001);
         i_rx = 1;
-        #100;
+        #1000;
+        uart_send_byte(8'b00000001);
+        i_rx = 1;
+        #1000;
         uart_send_byte(8'b00100000);
+        
+        // Receive
                
-        #50;
-        #50;
         $finish;
     end
             

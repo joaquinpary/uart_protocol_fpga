@@ -9,17 +9,17 @@ Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.baud_rate_generator(FREQ=1000000...
 Compiling module unisims_ver.IBUF
 Compiling module unisims_ver.PLLE2_ADV(CLKFBOUT_MULT=17,CLKIN...
 Compiling module unisims_ver.BUFG
 Compiling module xil_defaultlib.clk_wiz_0_clk_wiz
 Compiling module xil_defaultlib.clk_wiz_0
-Compiling module xil_defaultlib.baud_rate_generator
 Compiling module xil_defaultlib.uart_rx
 Compiling module xil_defaultlib.uart_tx
 Compiling module xil_defaultlib.interface
 Compiling module xil_defaultlib.alu
-Compiling module xil_defaultlib.top(CLOCK_TICK=10)
+Compiling module xil_defaultlib.top(FREQ=10000000.0)
 Compiling module xil_defaultlib.top_tb
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot top_tb_behav

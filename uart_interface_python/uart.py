@@ -32,18 +32,41 @@ def receive():
         print("Serial port not open")
         return None
 
+def operation(a, b, op_code):
+    send(a)
+    send(b)
+    match op_code:
+        case 'add':
+            send(b"\x20")
+        case 'sub':
+            send(b"\x22")
+        case 'and':
+            send(b"\x24")
+        case 'or':
+            send(b"\x25")
+        case 'xor':
+            send(b"\x26")
+        case 'sra':
+            send(b"\x03")
+        case 'srl':
+            send(b"\x02")
+        case 'nor':
+            send(b"\x27")
+        case _:
+            print("Invalid operation code")
+            send(b"\x00")
+    receive()
+
 # Main
 try:
-    for i in range(5):
-        time.sleep(1)
-        send(b"\x01")   # send a
-        #send(bytes(["0b00000001"]))   # send a
-        time.sleep(1)
-        send(b"\x01")   # send b
-        time.sleep(1)
-        send(b"\x20")   # send op_code
-        time.sleep(1)
-        receive()       # receive result
+    operation(b"\x01", b"\x02", "add")
+    operation(b"\x01", b"\x02", "sub")
+    operation(b"\x01", b"\x02", "and")
+    operation(b"\x01", b"\x02", "or")
+    operation(b"\x01", b"\x02", "xor")
+    operation(b"\x01", b"\x02", "sra")
+    operation(b"\x01", b"\x02", "srl")
+    operation(b"\x01", b"\x02", "nor")
 
 except serial.SerialException as e:
     print("Communication error: " + str(e))
